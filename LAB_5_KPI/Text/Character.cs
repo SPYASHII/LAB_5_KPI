@@ -7,13 +7,11 @@ using System.Text.RegularExpressions;
 
 namespace LAB_5_KPI.Text
 {
-    class Character : Word
+    class Character : Text
     {
         public Character(string text) : base(text)
         {
-            _Text = _Text.First().ToString();
-            _Count = 1;
-            IdentifyAlphabet();
+            
         }
         protected override void IdentifyAlphabet()
         {
@@ -36,6 +34,16 @@ namespace LAB_5_KPI.Text
                     return;
                 }
             }
+        }
+        protected override string Select(string text)
+        {
+            return text.First().ToString();
+        }
+        protected override void Initialize()
+        {
+            _Text = Select(_Text);
+            _Count = 1;
+            IdentifyAlphabet();
         }
     }
 }

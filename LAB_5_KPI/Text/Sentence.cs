@@ -7,14 +7,10 @@ using System.Text.RegularExpressions;
 
 namespace LAB_5_KPI.Text
 {
-    class Sentence : Text
+    class Sentence : Word
     {
-        
         public Sentence(string text) : base(text)
         {
-            _Text = Select(text);
-            Count(_Text);
-            IdentifyAlphabet();
         }
         private new void Count(string text)
         {
@@ -27,13 +23,11 @@ namespace LAB_5_KPI.Text
             return text.Substring(0, Regex.Match(text, @"[.?!]").Index + 1);
             return text;
         }
-        public override bool Equals(object obj)
+        protected override void Initialize()
         {
-            return obj.GetHashCode() == this.GetHashCode();
-        }
-        public override int GetHashCode()
-        {
-            return this.GetType().Name.GetHashCode();
+            _Text = Select(_Text);
+            Count(_Text);
+            IdentifyAlphabet();
         }
     }
 }

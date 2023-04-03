@@ -7,17 +7,20 @@ using System.Text.RegularExpressions;
 
 namespace LAB_5_KPI.Text
 {
-    class Word : Sentence
+    class Word : Character
     {
         public Word (string text) : base(text)
         {
-            _Text = Select(text);
-            base.Count(_Text);
-            IdentifyAlphabet();
         }
         protected override string Select(string text)
         {
             return Regex.Match(text, @"\b[\w']*\b").ToString();
+        }
+        protected override void Initialize()
+        {
+            _Text = Select(_Text);
+            Count(_Text);
+            IdentifyAlphabet();
         }
     }
 }

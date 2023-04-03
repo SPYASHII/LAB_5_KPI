@@ -10,6 +10,7 @@ namespace LAB_5_KPI.Drawning
     {
         Drawning()
         {
+            Console.WriteLine("Wooooow, draaaawning");
         }
     }
 }

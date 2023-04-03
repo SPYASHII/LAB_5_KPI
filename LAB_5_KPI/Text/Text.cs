@@ -9,12 +9,41 @@ namespace LAB_5_KPI.Text
 {
     abstract class Text
     {
-        public string Alphabet { get; protected set; }
-        public int _Count { get; protected set; }
-        public string _Text { get; protected set; }
-        public Text(string text)
+        protected string alphabet;
+        protected string text;
+        protected int count;
+        protected bool initialized = false;
+        protected Text(string text)
         {
             Count(text);
+            _Text = text;
+        }
+        public string Alphabet
+        {
+            get
+            {
+                if (!initialized) { initialized = true; Initialize(); }
+                return alphabet;
+            }
+            protected set => alphabet = value;
+        }
+        public int _Count 
+        {
+            get
+            {
+                if (!initialized) { initialized = true; Initialize(); }
+                return count;
+            }
+            protected set => count = value; 
+        }
+        public string _Text 
+        {
+            get
+            {
+                if (!initialized) { initialized = true; Initialize(); }
+                return text;
+            }
+            protected set => text = value;
         }
         protected virtual void IdentifyAlphabet()
         {
@@ -34,5 +63,6 @@ namespace LAB_5_KPI.Text
             _Count = a;
         }
         abstract protected string Select(string text);
+        abstract protected void Initialize();
     }
 }
