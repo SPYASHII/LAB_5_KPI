@@ -15,7 +15,8 @@ namespace LAB_5_KPI.Text
         protected bool initialized = false;
         protected Text(string text)
         {
-            Count(text);
+            int a = Regex.Replace(text, @"[ ]+", "").Length;
+            _Count = a;
             _Text = text;
         }
         public string Alphabet
@@ -45,24 +46,14 @@ namespace LAB_5_KPI.Text
             }
             protected set => text = value;
         }
-        protected virtual void IdentifyAlphabet()
-        {
-            string lat = "";
-            string cyr = "";
-            if (Regex.IsMatch(_Text, @"[A-Za-z]"))
-                lat = "Latin";
-            if (Regex.IsMatch(_Text, @"[А-Яа-я]"))
-                cyr = "Cyrillic";
-            Alphabet = $"{lat}{cyr}";
-            if (Alphabet == "")
-                Alphabet = "Unknown";
-        }
-        protected virtual void Count(string text)
-        {
-            int a = Regex.Replace(text, @"[ ]+", "").Length;
-            _Count = a;
-        }
+        abstract protected void IdentifyAlphabet();
+        abstract protected void Count(string text);
         abstract protected string Select(string text);
-        abstract protected void Initialize();
+        protected void Initialize()
+        {
+            _Text = Select(_Text);
+            Count(_Text);
+            IdentifyAlphabet();
+        }
     }
 }

@@ -16,11 +16,5 @@ namespace LAB_5_KPI.Text
         {
             return Regex.Match(text, @"\b[\w']*\b").ToString();
         }
-        protected override void Initialize()
-        {
-            _Text = Select(_Text);
-            Count(_Text);
-            IdentifyAlphabet();
-        }
     }
 }

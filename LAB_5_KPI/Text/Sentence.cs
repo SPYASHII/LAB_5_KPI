@@ -12,7 +12,7 @@ namespace LAB_5_KPI.Text
         public Sentence(string text) : base(text)
         {
         }
-        private new void Count(string text)
+        protected override void Count(string text)
         {
             var matches = Regex.Matches(text, @"[\wа-яА-Я]+");
             _Count = matches.Count;
@@ -22,12 +22,6 @@ namespace LAB_5_KPI.Text
             if(Regex.IsMatch(text, @"[.?!]"))
             return text.Substring(0, Regex.Match(text, @"[.?!]").Index + 1);
             return text;
-        }
-        protected override void Initialize()
-        {
-            _Text = Select(_Text);
-            Count(_Text);
-            IdentifyAlphabet();
         }
     }
 }

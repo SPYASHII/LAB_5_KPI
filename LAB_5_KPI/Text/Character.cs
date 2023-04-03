@@ -10,13 +10,18 @@ namespace LAB_5_KPI.Text
     class Character : Text
     {
         public Character(string text) : base(text)
-        {
-            
+        { 
         }
         protected override void IdentifyAlphabet()
         {
-            base.IdentifyAlphabet();
-            if(Alphabet == "Unknown")
+            string lat = "";
+            string cyr = "";
+            if (Regex.IsMatch(_Text, @"[A-Za-z]"))
+                lat = "Latin";
+            if (Regex.IsMatch(_Text, @"[А-Яа-я]"))
+                cyr = "Cyrillic";
+            Alphabet = $"{lat}{cyr}";
+            if (Alphabet == "")
             {
                 if (Regex.IsMatch(_Text, @"[\u3040-\u30FF]+"))
                 {
@@ -39,11 +44,10 @@ namespace LAB_5_KPI.Text
         {
             return text.First().ToString();
         }
-        protected override void Initialize()
+        protected override void Count(string text)
         {
-            _Text = Select(_Text);
-            _Count = 1;
-            IdentifyAlphabet();
+            int a = Regex.Replace(text, @"[ ]+", "").Length;
+            _Count = a;
         }
     }
 }
